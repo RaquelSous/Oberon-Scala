@@ -3,6 +3,7 @@ package br.unb.cic.oberon.parser
 import br.unb.cic.oberon.AbstractTestSuite
 import br.unb.cic.oberon.ir.ast._
 import org.scalatest.funsuite.AnyFunSuite
+import br.unb.cic.oberon.interpreter.Interpreter
 
 import scala.collection.mutable.Map
 
@@ -1377,6 +1378,43 @@ class ParserCombinatorTestSuite
       ) == stmt2(1)
     )
 
+  }
+  // test para implementacao bitwise *-*
+  val interpreter = new Interpreter()
+
+  test("BitwiseIntValue should evaluate to its integer value") {
+    val expr = BitwiseIntValue(42)
+    assert(interpreter.evaluate(expr) === 42)
+  }
+
+  test("BitwiseAnd should evaluate correctly") {
+    val expr = BitwiseAnd(BitwiseIntValue(12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (12 & 5))
+  }
+
+  test("BitwiseOr should evaluate correctly") {
+    val expr = BitwiseOr(BitwiseIntValue(12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (12 | 5))
+  }
+
+  test("BitwiseXor should evaluate correctly") {
+    val expr = BitwiseXor(BitwiseIntValue(12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (12 ^ 5))
+  }
+
+  test("LeftShift should evaluate correctly") {
+    val expr = LeftShift(BitwiseIntValue(4), BitwiseIntValue(2))
+    assert(interpreter.evaluate(expr) === (4 << 2))
+  }
+
+  test("RightShift should evaluate correctly") {
+    val expr = RightShift(BitwiseIntValue(16), BitwiseIntValue(2))
+    assert(interpreter.evaluate(expr) === (16 >> 2))
+  }
+
+  test("BitwiseNot should evaluate correctly") {
+    val expr = BitwiseNot(BitwiseIntValue(12))
+    assert(interpreter.evaluate(expr) === ~12)
   }
 
 }
