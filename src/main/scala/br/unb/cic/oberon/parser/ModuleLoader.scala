@@ -133,11 +133,6 @@ object ResourceModuleLoader {
     new ModuleMerger(loader).merge()
   }
 }
-/*
-/*
- * teste de parser para bitwise operators
- */
- *
  /*
 object ModuleBitwise extends RegexParsers {
   // tipo de Token

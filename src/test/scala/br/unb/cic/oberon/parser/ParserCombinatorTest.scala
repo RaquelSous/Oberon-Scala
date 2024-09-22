@@ -1417,4 +1417,35 @@ class ParserCombinatorTestSuite
     assert(interpreter.evaluate(expr) === ~12)
   }
 
+
+  // novos testes
+  test("Combination of BitwiseAnd and BitwiseOr should evaluate correctly") {
+    val expr = BitwiseOr(
+      BitwiseAnd(BitwiseIntValue(12), BitwiseIntValue(5)),
+      BitwiseIntValue(3)
+    )
+    assert(interpreter.evaluate(expr) === ((12 & 5) | 3))
+  }
+
+
+  test("Combination of shifts and BitwiseXor should evaluate correctly") {
+    val expr = BitwiseXor(
+      LeftShift(BitwiseIntValue(1), BitwiseIntValue(5)),
+      RightShift(BitwiseIntValue(32), BitwiseIntValue(2))
+    )
+    assert(interpreter.evaluate(expr) === ((1 << 5) ^ (32 >> 2)))
+  }
+
+
+  test("LeftShift with 0 should not change the value") {
+    val expr = LeftShift(BitwiseIntValue(4), BitwiseIntValue(0))
+    assert(interpreter.evaluate(expr) === 4)
+  }
+
+
+  test("RightShift with 0 should not change the value") {
+    val expr = RightShift(BitwiseIntValue(16), BitwiseIntValue(0))
+    assert(interpreter.evaluate(expr) === 16)
+  }
+
 }
