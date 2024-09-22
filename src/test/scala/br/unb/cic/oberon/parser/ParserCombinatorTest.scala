@@ -1448,4 +1448,63 @@ class ParserCombinatorTestSuite
     assert(interpreter.evaluate(expr) === 16)
   }
 
+
+  // mais testes
+  // Teste para valor negativo com BitwiseNot
+  test("BitwiseNot should evaluate correctly for negative numbers") {
+    val expr = BitwiseNot(BitwiseIntValue(-12))
+    assert(interpreter.evaluate(expr) === ~(-12))
+  }
+
+  // Teste para LeftShift com grande deslocamento
+  test("LeftShift should evaluate correctly with large shifts") {
+    val expr = LeftShift(BitwiseIntValue(1), BitwiseIntValue(10))
+    assert(interpreter.evaluate(expr) === (1 << 10))
+  }
+
+  // Teste para RightShift com grande deslocamento
+  test("RightShift should evaluate correctly with large shifts") {
+    val expr = RightShift(BitwiseIntValue(1024), BitwiseIntValue(10))
+    assert(interpreter.evaluate(expr) === (1024 >> 10))
+  }
+
+  // Teste para BitwiseAnd com números negativos
+  test("BitwiseAnd should evaluate correctly with negative numbers") {
+    val expr = BitwiseAnd(BitwiseIntValue(-12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (-12 & 5))
+  }
+
+  // Teste para BitwiseOr com números negativos
+  test("BitwiseOr should evaluate correctly with negative numbers") {
+    val expr = BitwiseOr(BitwiseIntValue(-12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (-12 | 5))
+  }
+
+  // Teste para BitwiseXor com números negativos
+  test("BitwiseXor should evaluate correctly with negative numbers") {
+    val expr = BitwiseXor(BitwiseIntValue(-12), BitwiseIntValue(5))
+    assert(interpreter.evaluate(expr) === (-12 ^ 5))
+  }
+
+  // Teste para combinações de operações bitwise
+  test("Complex bitwise expression should evaluate correctly") {
+    val expr = BitwiseOr(
+      BitwiseAnd(BitwiseIntValue(14), BitwiseIntValue(7)),
+      LeftShift(BitwiseIntValue(3), BitwiseIntValue(2))
+    )
+    assert(interpreter.evaluate(expr) === ((14 & 7) | (3 << 2)))
+  }
+
+  // Teste para LeftShift com 0
+  test("LeftShift should evaluate correctly with zero shift") {
+    val expr = LeftShift(BitwiseIntValue(5), BitwiseIntValue(0))
+    assert(interpreter.evaluate(expr) === 5)
+  }
+
+  // Teste para RightShift com 0
+  test("RightShift should evaluate correctly with zero shift") {
+    val expr = RightShift(BitwiseIntValue(5), BitwiseIntValue(0))
+    assert(interpreter.evaluate(expr) === 5)
+  }
+
 }
