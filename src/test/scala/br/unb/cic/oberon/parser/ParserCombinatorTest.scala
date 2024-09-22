@@ -1473,19 +1473,16 @@ class ParserCombinatorTestSuite
     val expr = BitwiseAnd(BitwiseIntValue(-12), BitwiseIntValue(5))
     assert(interpreter.evaluate(expr) === (-12 & 5))
   }
-
   // Teste para BitwiseOr com números negativos
   test("BitwiseOr should evaluate correctly with negative numbers") {
     val expr = BitwiseOr(BitwiseIntValue(-12), BitwiseIntValue(5))
     assert(interpreter.evaluate(expr) === (-12 | 5))
   }
-
   // Teste para BitwiseXor com números negativos
   test("BitwiseXor should evaluate correctly with negative numbers") {
     val expr = BitwiseXor(BitwiseIntValue(-12), BitwiseIntValue(5))
     assert(interpreter.evaluate(expr) === (-12 ^ 5))
   }
-
   // Teste para combinações de operações bitwise
   test("Complex bitwise expression should evaluate correctly") {
     val expr = BitwiseOr(
@@ -1494,7 +1491,6 @@ class ParserCombinatorTestSuite
     )
     assert(interpreter.evaluate(expr) === ((14 & 7) | (3 << 2)))
   }
-
   // Teste para LeftShift com 0
   test("LeftShift should evaluate correctly with zero shift") {
     val expr = LeftShift(BitwiseIntValue(5), BitwiseIntValue(0))
