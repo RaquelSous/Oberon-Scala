@@ -1506,5 +1506,4 @@ class ParserCombinatorTestSuite
     val expr = RightShift(BitwiseIntValue(5), BitwiseIntValue(0))
     assert(interpreter.evaluate(expr) === 5)
   }
-
 }
